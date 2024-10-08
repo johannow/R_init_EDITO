@@ -5,7 +5,7 @@
 echo "Starting initialization..."
 
 # Install the necessary R packages
-R -e 'install.packages("pak")'
+R -e 'if(!require("pak"))install.packages("pak")'
 R -e '
 packages <- c("arrow", "tidyverse", "doParallel", "rasterVis", "mapview", 
              "ENMeval", "dynamicSDM", "gridExtra", "pak", "raster", "spThin",
@@ -13,18 +13,3 @@ packages <- c("arrow", "tidyverse", "doParallel", "rasterVis", "mapview",
 
 pak::pkg_install(packages)
 '
-
-# Restart R session if RStudio is detected
-R -e '
-if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
-  cat("Restarting R session in RStudio...\n")
-  rstudioapi::restartSession()
-} else {
-  cat("RStudio not detected, continuing without restarting.\n")
-}
-'
-
-
-
-
-
