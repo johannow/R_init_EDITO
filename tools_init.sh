@@ -5,7 +5,7 @@
 echo "Starting initialization..."
 
 # Install the necessary R packages
-R -e 'install.packages('pak')'
+R -e 'install.packages("pak")'
 R -e '
 packages <- c("arrow", "tidyverse", "doParallel", "rasterVis", "mapview", 
              "ENMeval", "dynamicSDM", "gridExtra", "pak", "raster", "spThin",
