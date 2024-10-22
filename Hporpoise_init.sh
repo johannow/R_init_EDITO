@@ -37,8 +37,7 @@ packages <- c("arules",
                   "worrms",
                   "xgboost")
 #For the packages that need to be installed from github
-package_list_github <-c("vlizBE/imis",
-                        "tidymodels/tune")
+package_list_github <-c("vlizBE/imis")
 pak::pkg_install(c(packages,package_list_github))
 '
 
