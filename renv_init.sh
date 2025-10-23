@@ -1,30 +1,22 @@
 # Print a message indicating the start of the initialization
 #!/bin/bash
 
-# Print a message indicating the start of the initialization
-echo "Install necessary system dependencies..."
-# Update package list and install dependencies
-sudo apt-get update && sudo apt-get install -y \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libxml2-dev \
-    libgit2-dev \
-    libpng-dev \
-    libgdal-dev \
-    libproj-dev \
-    libgeos-dev \
-    zlib1g-dev \
-    libudunits2-dev \
-    libsodium-dev \
-    build-essential \
-    pkg-config \
-    python3 \
-    python3-venv \
-    python3-pip
+# Adjust R compiler flags
+echo "Configuring R compiler flags..."
 
-# Clean up to reduce image size / disk usage
-sudo rm -rf /var/lib/apt/lists/*
+mkdir -p ~/.R
 
+cat > ~/.R/Makevars <<EOF
+CFLAGS=-g -O2 -Wall
+CXXFLAGS=-g -O2 -Wall
+EOF
+
+if [ -f /usr/local/lib/R/etc/Makeconf ]; then
+    sudo sed -i 's/-Werror=format-security//g' /usr/local/lib/R/etc/Makeconf
+    echo "Removed problematic -Werror flag from R Makeconf."
+else
+    echo "Warning: /usr/local/lib/R/etc/Makeconf not found — skipping sed modification."
+fi
 
 echo "Starting initialization based on renv.lock file..."
 
