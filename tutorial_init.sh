@@ -9,3 +9,6 @@ apt-get install -y \
     python3-pip \
     libsecret-1-dev \
     libcurl4-openssl-dev
+
+echo "Changing into DUC folder..."
+cd ~/work/duc2_telemetry
